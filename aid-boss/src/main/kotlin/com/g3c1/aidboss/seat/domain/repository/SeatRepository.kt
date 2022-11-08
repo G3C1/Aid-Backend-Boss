@@ -1,4 +1,0 @@
-package com.g3c1.aidboss.seat.domain.repository
-
-interface SeatRepository {
-}
