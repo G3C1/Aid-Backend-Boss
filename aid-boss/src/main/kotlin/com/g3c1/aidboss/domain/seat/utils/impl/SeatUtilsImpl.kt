@@ -13,4 +13,8 @@ class SeatUtilsImpl(
     override fun findSeatById(seatId: Long): Seat =
         seatRepository.findSeatById(seatId).orElseThrow { SeatNotFoundException() }
 
+    override fun save(seat: Seat) {
+        seatRepository.save(seat)
+    }
+
 }
