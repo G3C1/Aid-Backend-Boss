@@ -23,7 +23,7 @@ class SeatController(
     @PostMapping
     fun createSeat(@Valid @RequestBody createSeatRequest: CreateSeatRequest):ResponseEntity<Void> =
         seatConverter.toDto(createSeatRequest)
-            .let { seatService.createSeat() }
+            .let { seatService.createSeat(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
     @PatchMapping("/cancel/{seatId}")
