@@ -20,6 +20,6 @@ class SeatServiceV2Impl(
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     override fun createSeat(createSeatDto: CreateSeatDto, serialNumber: Long) {
         seatConverter.toEntity(createSeatDto,storeUtils.findStoreBySerialNumber(serialNumber))
-            .let { seatUtils.save(it)}
+            .let(seatUtils::save)
     }
 }
