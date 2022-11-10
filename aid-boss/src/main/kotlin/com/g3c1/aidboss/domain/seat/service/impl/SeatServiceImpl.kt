@@ -5,8 +5,12 @@ import com.g3c1.aidboss.domain.seat.service.SeatService
 import com.g3c1.aidboss.domain.seat.utils.SeatConverter
 import com.g3c1.aidboss.domain.seat.utils.SeatUtils
 import com.g3c1.aidboss.domain.seat.utils.SeatValidator
+import com.g3c1.aidboss.domain.store.domain.entity.Store
+import com.g3c1.aidboss.domain.user.domain.entity.User
+import org.springframework.data.jpa.repository.Lock
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import javax.persistence.LockModeType
 
 @Service
 class SeatServiceImpl(
@@ -15,8 +19,9 @@ class SeatServiceImpl(
     private val seatConverter: SeatConverter
 ): SeatService {
     @Transactional(rollbackFor = [Exception::class])
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     override fun createSeat(createSeatDto: CreateSeatDto) {
-        seatConverter.toEntity(createSeatDto)
+        seatConverter.toEntity(createSeatDto,Store(1,"","","",User("","","")))
             .let { seatUtils.save(it)}
     }
 
