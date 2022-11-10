@@ -7,7 +7,7 @@ import javax.persistence.Id
 @Entity
 data class User (
     @Id
-    val Id: String,
+    val id: String,
     @Column(nullable = false)
     val password: String,
     @Column(nullable = false)
