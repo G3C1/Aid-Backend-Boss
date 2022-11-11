@@ -1,7 +1,7 @@
 package com.g3c1.aidboss.global.security.filter
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.g3c1.aidboss.global.error.ErrorCode
+import com.g3c1.aidboss.global.error.type.ErrorCode
 import com.g3c1.aidboss.global.error.exception.BasicException
 import org.springframework.http.MediaType
 import org.springframework.web.filter.OncePerRequestFilter
@@ -23,7 +23,7 @@ class ExceptionFilter(
             sendError(response,e.errorCode)
         }catch (e: Exception){
             logger.error(e)
-            sendError(response,ErrorCode.INTERNET_SERVER_ERROR)
+            sendError(response, ErrorCode.INTERNET_SERVER_ERROR)
         }
     }
     private fun sendError(response: HttpServletResponse,errorCode: ErrorCode){

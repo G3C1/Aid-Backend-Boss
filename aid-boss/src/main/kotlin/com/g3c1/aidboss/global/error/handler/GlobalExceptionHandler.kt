@@ -1,7 +1,7 @@
 package com.g3c1.aidboss.global.error.handler
 
-import com.g3c1.aidboss.global.error.ErrorCode
-import com.g3c1.aidboss.global.error.ErrorResponse
+import com.g3c1.aidboss.global.error.type.ErrorCode
+import com.g3c1.aidboss.global.error.response.ErrorResponse
 import com.g3c1.aidboss.global.error.exception.BasicException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity

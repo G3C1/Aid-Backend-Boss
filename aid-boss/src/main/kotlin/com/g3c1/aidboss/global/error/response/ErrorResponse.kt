@@ -1,4 +1,4 @@
-package com.g3c1.aidboss.global.error
+package com.g3c1.aidboss.global.error.response
 
 data class ErrorResponse (
     val message: String,
