@@ -9,5 +9,6 @@ enum class ErrorCode(val message:String, val status: Int) {
     SEAT_NOT_FOUND("SeatIsNotFound",404),
     USER_NOT_FOUND("UserIsNotFound",404),
     CATEGORY_NOT_FOUND("CategoryIsNotFound",404),
+    USER_ALREADY_EXIST("User Already Exist",409),
     INTERNET_SERVER_ERROR("InternetServerError",500)
 }

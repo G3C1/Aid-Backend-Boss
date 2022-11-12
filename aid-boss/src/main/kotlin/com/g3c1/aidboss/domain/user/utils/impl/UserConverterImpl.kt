@@ -11,8 +11,8 @@ class UserConverterImpl: UserConverter {
     override fun toDto(registerRequest: RegisterRequest): RegisterDto =
         RegisterDto(registerRequest.id,registerRequest.password,registerRequest.name)
 
-    override fun toEntity(registerDto: RegisterDto, encodedPassword: String): User {
-        TODO("Not yet implemented")
-    }
+    override fun toEntity(registerDto: RegisterDto, encodedPassword: String): User =
+        User(registerDto.id,registerDto.name,encodedPassword)
+
 
 }
