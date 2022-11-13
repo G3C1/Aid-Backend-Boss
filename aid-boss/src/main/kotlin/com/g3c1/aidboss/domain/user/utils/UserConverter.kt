@@ -1,10 +1,16 @@
 package com.g3c1.aidboss.domain.user.utils
 
 import com.g3c1.aidboss.domain.user.domain.entity.User
+import com.g3c1.aidboss.domain.user.presentation.data.dto.LoginDto
 import com.g3c1.aidboss.domain.user.presentation.data.dto.RegisterDto
+import com.g3c1.aidboss.domain.user.presentation.data.dto.TokenDto
+import com.g3c1.aidboss.domain.user.presentation.data.request.LoginRequest
 import com.g3c1.aidboss.domain.user.presentation.data.request.RegisterRequest
+import com.g3c1.aidboss.domain.user.presentation.data.response.LoginResponse
 
 interface UserConverter {
     fun toDto(registerRequest: RegisterRequest): RegisterDto
+    fun toDto(loginRequest: LoginRequest): LoginDto
+    fun toResponse(tokenDto: TokenDto): LoginResponse
     fun toEntity(registerDto: RegisterDto,encodedPassword:String): User
 }

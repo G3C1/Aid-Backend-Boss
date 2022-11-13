@@ -2,6 +2,7 @@ package com.g3c1.aidboss.global.error.type
 
 enum class ErrorCode(val message:String, val status: Int) {
     SEAT_NOT_USED("SeatIsNotUsed",400),
+    PASSWORD_DIS_MATCH("PasswordDisMatch",400),
     UNAUTHORIZED("Unauthorized",401),
     EXPIRED_TOKEN("Expired Token",401),
     INVALID_TOKEN( "Invalid Token",401),

@@ -1,6 +1,8 @@
 package com.g3c1.aidboss.domain.user.presentation
 
+import com.g3c1.aidboss.domain.user.presentation.data.request.LoginRequest
 import com.g3c1.aidboss.domain.user.presentation.data.request.RegisterRequest
+import com.g3c1.aidboss.domain.user.presentation.data.response.LoginResponse
 import com.g3c1.aidboss.domain.user.service.UserAccountService
 import com.g3c1.aidboss.domain.user.utils.UserConverter
 import org.springframework.http.HttpStatus
@@ -23,7 +25,9 @@ class UserController(
             .let { userAccountService.register(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
     @PostMapping("/login")
-    fun login(): ResponseEntity<Void>{
-        return ResponseEntity.ok().build()
-    }
+    fun login(@Valid @RequestBody loginRequest: LoginRequest): ResponseEntity<LoginResponse> =
+        userConverter.toDto(loginRequest)
+            .let { userAccountService.login(it) }
+            .let { userConverter.toResponse(it) }
+            .let { ResponseEntity.ok().body(it) }
 }
