@@ -34,7 +34,7 @@ class UserAccountServiceImpl(
         val accessToken: String = tokenProvider.generateAccessToken(loginDto.id)
         val refreshToken: String = tokenProvider.generateRefreshToken(loginDto.id)
         val expiredAt: ZonedDateTime = tokenProvider.getExpiredTime()
-        val refreshTokenInfo: RefreshToken = RefreshToken(loginDto.id,accessToken,1)
+        val refreshTokenInfo = RefreshToken(loginDto.id,accessToken,tokenProvider.getRefreshTokenExp())
         refreshTokenRepository.save(refreshTokenInfo)
         return TokenDto(accessToken,refreshToken,expiredAt)
     }
