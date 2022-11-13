@@ -12,6 +12,4 @@ class UserValidatorImpl(
     override fun validateUserId(userId : String) {
         if(userRepository.existsById(userId)) throw UserAlreadyExistException()
     }
-
-
 }

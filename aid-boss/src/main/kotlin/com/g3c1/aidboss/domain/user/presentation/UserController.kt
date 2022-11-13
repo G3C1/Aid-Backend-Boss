@@ -22,4 +22,8 @@ class UserController(
         userConverter.toDto(registerRequest)
             .let { userAccountService.register(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
+    @PostMapping("/login")
+    fun login(): ResponseEntity<Void>{
+        return ResponseEntity.ok().build()
+    }
 }

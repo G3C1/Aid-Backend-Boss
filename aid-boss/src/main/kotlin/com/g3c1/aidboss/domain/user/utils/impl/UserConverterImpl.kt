@@ -13,6 +13,4 @@ class UserConverterImpl: UserConverter {
 
     override fun toEntity(registerDto: RegisterDto, encodedPassword: String): User =
         User(registerDto.id,registerDto.name,encodedPassword)
-
-
 }
