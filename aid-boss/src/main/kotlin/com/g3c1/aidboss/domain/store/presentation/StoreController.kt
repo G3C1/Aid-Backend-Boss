@@ -1,6 +1,9 @@
 package com.g3c1.aidboss.domain.store.presentation
 
-import com.g3c1.aidboss.domain.category.presentation.data.request.CreateCategoryRequest
+import com.g3c1.aidboss.domain.store.presentation.data.request.CreateStoreRequest
+import com.g3c1.aidboss.domain.store.service.StoreService
+import com.g3c1.aidboss.domain.store.utils.StoreConverter
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -9,9 +12,13 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("api/v1/store")
-class StoreController {
+class StoreController(
+    private val storeService: StoreService,
+    private val storeConverter: StoreConverter
+) {
     @PostMapping
-    fun createStore(@RequestBody createCategoryRequest: CreateCategoryRequest): ResponseEntity<Void>{
-        return ResponseEntity.ok().build()
-    }
+    fun createStore(@RequestBody createStoreRequest: CreateStoreRequest): ResponseEntity<Void> =
+        storeConverter.toDto(createStoreRequest)
+            .let { storeService.createStore(it) }
+            .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 }
