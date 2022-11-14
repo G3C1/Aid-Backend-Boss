@@ -7,6 +7,7 @@ import com.g3c1.aidboss.domain.user.service.UserAccountService
 import com.g3c1.aidboss.domain.user.utils.UserConverter
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -37,4 +38,9 @@ class UserController(
         userAccountService.refresh(refreshToken)
             .let { userConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+    @DeleteMapping
+    fun withdrawal(): ResponseEntity<Void>{
+        userAccountService.withdrawal()
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
 }

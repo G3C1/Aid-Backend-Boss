@@ -8,4 +8,5 @@ interface UserAccountService {
     fun register(registerDto: RegisterDto)
     fun login(loginDto: LoginDto): TokenDto
     fun refresh(refreshToken: String): TokenDto
+    fun withdrawal()
 }

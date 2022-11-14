@@ -11,6 +11,7 @@ import com.g3c1.aidboss.domain.user.service.UserAccountService
 import com.g3c1.aidboss.domain.user.utils.UserConverter
 import com.g3c1.aidboss.domain.user.utils.UserValidator
 import com.g3c1.aidboss.global.security.jwt.JwtTokenProvider
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import java.time.ZonedDateTime
@@ -52,5 +53,10 @@ class UserAccountServiceImpl(
         redisRefreshToken.update(refreshToken,tokenProvider.getRefreshTokenExp())
         refreshTokenRepository.save(redisRefreshToken)
         return TokenDto(accessToken,refreshToken,expiredAt)
+    }
+
+    override fun withdrawal() {
+        val user = userRepository.findUserById(SecurityContextHolder.getContext().getAuthentication().getName()) ?: throw UserNotFoundException()
+        userRepository.delete(user)
     }
 }
