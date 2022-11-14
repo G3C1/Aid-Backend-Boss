@@ -1,7 +1,9 @@
 package com.g3c1.aidboss.domain.store.service.impl
 
+import com.g3c1.aidboss.domain.store.domain.entity.Store
 import com.g3c1.aidboss.domain.store.domain.repository.StoreRepository
 import com.g3c1.aidboss.domain.store.presentation.data.dto.CreateStoreDto
+import com.g3c1.aidboss.domain.store.presentation.data.dto.MyStoreDto
 import com.g3c1.aidboss.domain.store.service.StoreService
 import com.g3c1.aidboss.domain.store.utils.StoreConverter
 import com.g3c1.aidboss.domain.user.utils.UserUtils
@@ -19,5 +21,11 @@ class StoreServiceImpl(
         val user = userUtils.getCurrentUser()
         storeConverter.toEntity(createStoreDto,user)
             .let { storeRepository.save(it) }
+    }
+
+    override fun findAllById(): MyStoreDto {
+        val user = userUtils.getCurrentUser()
+        val storeList:List<Store> = storeRepository.findAllByUser(user)
+        return storeConverter.toDto(user.name,storeList)
     }
 }
