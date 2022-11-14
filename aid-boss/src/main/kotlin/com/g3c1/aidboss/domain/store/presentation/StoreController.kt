@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("api/v1/store")
+@RequestMapping("api/v2/store")
 class StoreController(
     private val storeService: StoreService,
     private val storeConverter: StoreConverter
