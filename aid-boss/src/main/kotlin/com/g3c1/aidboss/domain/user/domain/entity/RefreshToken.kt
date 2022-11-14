@@ -10,7 +10,12 @@ data class RefreshToken(
     @Id
     val id:String,
     @Indexed
-    val token:String,
+    var token:String,
     @TimeToLive
-    val timeToLive: Long
-)
+    var timeToLive: Long
+) {
+    fun update(refreshToken: String, refreshTokenExp: Long) {
+        this.token = refreshToken
+        this.timeToLive = timeToLive
+    }
+}

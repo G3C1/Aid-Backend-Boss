@@ -70,8 +70,11 @@ class JwtTokenProvider(
         return if (token != null && token.startsWith("Bearer ")) token.replace("Bearer ", "") else null
     }
 
-    private fun getTokenSubject(token: String, secret: String): String? {
+    private fun getTokenSubject(token: String, secret: String): String {
         return getTokenBody(token, secret).get("email", String::class.java)
     }
-
+    fun extractIdFromRefreshToken(token: String): String {
+        val refresh = token.replace("Bearer ", "")
+        return getTokenSubject(refresh, jwtProperties.refreshSecret)
+    }
 }
