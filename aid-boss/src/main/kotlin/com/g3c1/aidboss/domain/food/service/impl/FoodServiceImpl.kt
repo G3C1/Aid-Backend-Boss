@@ -20,8 +20,8 @@ class FoodServiceImpl(
 ): FoodService {
     @Transactional(readOnly = true, rollbackFor = [Exception::class])
     override fun findFoodListByCategory(): List<CategoryFoodListDto> =
-        categoryUtils.findAllCategory().toList().map {category->
-            CategoryFoodListDto(category.id,category.name,findFoodByCategory(category))
+        categoryUtils.findAllCategory()
+            .map {category-> CategoryFoodListDto(category.id,category.name,findFoodByCategory(category))
     }
     private fun findFoodByCategory(category: Category):List<CategoryFoodListDto.FoodDto> =
         foodRepository.findByCategory(category).toList()

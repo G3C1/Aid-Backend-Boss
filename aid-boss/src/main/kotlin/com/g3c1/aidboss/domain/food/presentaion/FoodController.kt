@@ -20,7 +20,7 @@ class FoodController(
     private val foodConverter: FoodConverter
 ) {
     @GetMapping
-    fun findFoodListByCategory(): ResponseEntity<List<CategoryFoodListResponse>> =
+    fun findFoodList(): ResponseEntity<List<CategoryFoodListResponse>> =
         foodService.findFoodListByCategory()
             .let { foodConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it)}
