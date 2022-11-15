@@ -4,6 +4,8 @@ import org.jetbrains.annotations.NotNull
 
 data class UpdateFoodRequest (
     @field: NotNull
+    val foodId: Long,
+    @field: NotNull
     val foodName :String,
     @field: NotNull
     val foodImg:String,

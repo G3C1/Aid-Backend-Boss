@@ -6,6 +6,7 @@ import com.g3c1.aidboss.domain.food.domain.repository.FoodRepository
 import com.g3c1.aidboss.domain.food.exception.FoodNotFoundException
 import com.g3c1.aidboss.domain.food.presentaion.data.dto.CategoryFoodListDto
 import com.g3c1.aidboss.domain.food.presentaion.data.dto.DeleteFoodDto
+import com.g3c1.aidboss.domain.food.presentaion.data.dto.UpdateFoodDto
 import com.g3c1.aidboss.domain.food.service.FoodServiceV2
 import com.g3c1.aidboss.domain.food.utils.FoodUtils
 import com.g3c1.aidboss.domain.store.utils.StoreUtlis
@@ -31,5 +32,10 @@ class FoodServiceV2Impl(
             .map { foodRepository.findById(it).orElseThrow { FoodNotFoundException() } }
 
         foodRepository.deleteAll(foodList)
+    }
+    @Transactional(rollbackFor = [Exception::class])
+    override fun updateFood(dto: UpdateFoodDto) {
+        val food:Food = foodRepository.findById(dto.foodId).orElseThrow { FoodNotFoundException() }
+        food.updateFood(dto,categoryUtils.findById(dto.categoryId))
     }
 }

@@ -38,5 +38,6 @@ class FoodControllerV2(
     @PutMapping
     fun updateFood(@Valid @RequestBody updateFoodRequest: UpdateFoodRequest): ResponseEntity<Void> =
         foodConverter.toDto(updateFoodRequest)
+            .let { foodServiceV2.updateFood(it) }
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 }

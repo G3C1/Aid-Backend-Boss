@@ -22,7 +22,7 @@ class FoodConverterImpl :FoodConverter {
         DeleteFoodDto(requset.foodIdList)
 
     override fun toDto(request: UpdateFoodRequest): UpdateFoodDto =
-        UpdateFoodDto(request.foodName,request.foodImg,request.foodDescription,request.servings,request.price,request.categoryId)
+        UpdateFoodDto(request.foodId,request.foodName,request.foodImg,request.foodDescription,request.servings,request.price,request.categoryId)
 
     override fun toEntity(dto: CreateFoodDto.FoodInfo, entity: Category): Food =
         Food(dto.foodName,dto.foodImg,dto.foodDescription,dto.servings,dto.price,entity)
