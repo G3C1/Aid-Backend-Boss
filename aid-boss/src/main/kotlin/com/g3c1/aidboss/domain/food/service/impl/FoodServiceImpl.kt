@@ -7,6 +7,7 @@ import com.g3c1.aidboss.domain.food.presentaion.data.dto.CategoryFoodListDto
 import com.g3c1.aidboss.domain.food.presentaion.data.dto.CreateFoodDto
 import com.g3c1.aidboss.domain.food.service.FoodService
 import com.g3c1.aidboss.domain.food.utils.FoodConverter
+import com.g3c1.aidboss.domain.food.utils.FoodUtils
 import org.springframework.data.jpa.repository.Lock
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -16,16 +17,14 @@ import javax.persistence.LockModeType
 class FoodServiceImpl(
     private val foodRepository: FoodRepository,
     private val categoryUtils: CategoryUtils,
-    private val foodConverter: FoodConverter
+    private val foodConverter: FoodConverter,
+    private val foodUtils: FoodUtils
 ): FoodService {
     @Transactional(readOnly = true, rollbackFor = [Exception::class])
     override fun findFoodListByCategory(): List<CategoryFoodListDto> =
         categoryUtils.findAllCategory()
-            .map {category-> CategoryFoodListDto(category.id,category.name,findFoodByCategory(category))
+            .map {category-> CategoryFoodListDto(category.id,category.name,foodUtils.findFoodByCategory(category))
     }
-    private fun findFoodByCategory(category: Category):List<CategoryFoodListDto.FoodDto> =
-        foodRepository.findByCategory(category).toList()
-            .map { CategoryFoodListDto.FoodDto(it.id,it.name,it.img,it.description,it.servings,it.price) }
 
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
