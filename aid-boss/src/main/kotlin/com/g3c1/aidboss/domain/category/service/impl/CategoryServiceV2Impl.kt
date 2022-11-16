@@ -20,6 +20,6 @@ class CategoryServiceV2Impl(
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     override fun createCategory(categoryDto: CategoryDto, serialNumber: Long) {
         categoryConverter.toEntity(categoryDto,storeUtils.findStoreBySerialNumber(serialNumber))
-            .let { categoryRepository.saveAll(it) }
+            .let { categoryRepository.save(it) }
     }
 }

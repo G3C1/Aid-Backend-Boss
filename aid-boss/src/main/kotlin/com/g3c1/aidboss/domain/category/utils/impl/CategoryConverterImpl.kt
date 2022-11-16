@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class CategoryConverterImpl: CategoryConverter {
-    override fun toDto(createCategoryRequest: CreateCategoryRequest): CategoryDto = CategoryDto(createCategoryRequest.categoryList)
-    override fun toEntity(dto: CategoryDto, store: Store): List<Category> = dto.categoryList.map { Category(it,store) }
+    override fun toDto(createCategoryRequest: CreateCategoryRequest): CategoryDto = CategoryDto(createCategoryRequest.categoryName)
+    override fun toEntity(dto: CategoryDto, store: Store): Category = Category(dto.categoryName,store)
 }

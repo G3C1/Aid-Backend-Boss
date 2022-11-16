@@ -21,8 +21,8 @@ class CategoryServiceImpl(
     override fun createCategory(categoryDto: CategoryDto) {
         categoryConverter.toEntity(
             categoryDto,
-            Store(1, "", "", "", User("", "", ""))
+            Store(0, "", "", "", User("", "", ""))
         )
-            .let { categoryRepository.saveAll(it) }
+            .let { categoryRepository.save(it) }
     }
 }

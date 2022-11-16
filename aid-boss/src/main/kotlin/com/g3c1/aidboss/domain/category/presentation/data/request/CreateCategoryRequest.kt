@@ -4,5 +4,5 @@ import org.jetbrains.annotations.NotNull
 
 data class CreateCategoryRequest (
     @field:NotNull
-    val categoryList: List<String>
+    val categoryName: String
 )
