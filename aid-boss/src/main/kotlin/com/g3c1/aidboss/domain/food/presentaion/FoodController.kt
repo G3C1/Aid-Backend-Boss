@@ -25,7 +25,7 @@ class FoodController(
             .let { foodConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it)}
     @PostMapping
-    fun createFood(@Valid @RequestBody createFoodRequest: CreateFoodRequest): ResponseEntity<Void> =
+    fun createFood(@RequestBody @Valid createFoodRequest: CreateFoodRequest): ResponseEntity<Void> =
         foodConverter.toDto(createFoodRequest)
             .let { foodService.createFood(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }

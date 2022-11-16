@@ -20,7 +20,7 @@ class StoreController(
     private val storeConverter: StoreConverter
 ) {
     @PostMapping
-    fun createStore(@Valid @RequestBody createStoreRequest: CreateStoreRequest): ResponseEntity<Void> =
+    fun createStore(@RequestBody @Valid createStoreRequest: CreateStoreRequest): ResponseEntity<Void> =
         storeConverter.toDto(createStoreRequest)
             .let { storeService.createStore(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }

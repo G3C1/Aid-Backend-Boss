@@ -18,7 +18,7 @@ class CategoryController(
     private val categoryConverter: CategoryConverter
 ) {
     @PostMapping
-    fun createCategory(@Valid @RequestBody createCategoryListRequest: CreateCategoryRequest): ResponseEntity<Void> =
+    fun createCategory(@RequestBody @Valid createCategoryListRequest: CreateCategoryRequest): ResponseEntity<Void> =
         categoryConverter.toDto(createCategoryListRequest)
             .let { categoryService.createCategory(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }

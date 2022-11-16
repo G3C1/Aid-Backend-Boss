@@ -17,12 +17,12 @@ class UserController(
     private val userConverter: UserConverter
 ) {
     @PostMapping
-    fun register(@Valid @RequestBody registerRequest: RegisterRequest):ResponseEntity<Void> =
+    fun register(@RequestBody @Valid registerRequest: RegisterRequest):ResponseEntity<Void> =
         userConverter.toDto(registerRequest)
             .let { userAccountService.register(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
     @PostMapping("/login")
-    fun login(@Valid @RequestBody loginRequest: LoginRequest): ResponseEntity<TokenResponse> =
+    fun login(@RequestBody @Valid loginRequest: LoginRequest): ResponseEntity<TokenResponse> =
         userConverter.toDto(loginRequest)
             .let { userAccountService.login(it) }
             .let { userConverter.toResponse(it) }

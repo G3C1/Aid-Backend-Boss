@@ -21,5 +21,5 @@ class UserConverterImpl: UserConverter {
         TokenResponse(tokenDto.accessToken,tokenDto.refreshToken,tokenDto.expiredAt)
 
     override fun toEntity(registerDto: RegisterDto, encodedPassword: String): User =
-        User(registerDto.id,registerDto.name,encodedPassword)
+        User(registerDto.id,encodedPassword,registerDto.name)
 }

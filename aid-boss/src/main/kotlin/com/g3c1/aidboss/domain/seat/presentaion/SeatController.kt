@@ -21,7 +21,7 @@ class SeatController(
     private val seatConverter: SeatConverter
 ) {
     @PostMapping
-    fun createSeat(@Valid @RequestBody createSeatRequest: CreateSeatRequest):ResponseEntity<Void> =
+    fun createSeat(@RequestBody @Valid createSeatRequest: CreateSeatRequest):ResponseEntity<Void> =
         seatConverter.toDto(createSeatRequest)
             .let { seatService.createSeat(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
