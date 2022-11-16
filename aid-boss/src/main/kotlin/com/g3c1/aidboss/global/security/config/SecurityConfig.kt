@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.web.cors.CorsUtils
 
@@ -23,8 +24,9 @@ class SecurityConfig(
     private val jwtTokenProvider: JwtTokenProvider,
     private val objectMapper: ObjectMapper,
 ) {
-    @Throws(Exception::class)
-    fun configure(http: HttpSecurity) {
+
+    @Bean
+    fun filterChain(http: HttpSecurity):SecurityFilterChain {
         http
             .csrf().disable()
             .formLogin().disable()
@@ -34,15 +36,15 @@ class SecurityConfig(
             .and()
             .authorizeRequests()
             .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-            .antMatchers(HttpMethod.POST,"api/v2/user/**").permitAll()
-            .antMatchers(HttpMethod.POST,"api/v2/user").permitAll()
-            .antMatchers(HttpMethod.PUT,"api/v2/user").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/v2/user").permitAll()
+            .antMatchers(HttpMethod.PUT,"/api/v2/user").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
             .and()
             .addFilterAfter(JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter::class.java)
             .addFilterBefore(ExceptionFilter(objectMapper), UsernamePasswordAuthenticationFilter::class.java)
+        return http.build()
     }
 
     @Bean
