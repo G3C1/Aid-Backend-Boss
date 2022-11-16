@@ -16,6 +16,6 @@ data class RefreshToken(
 ) {
     fun update(refreshToken: String, refreshTokenExp: Long) {
         this.token = refreshToken
-        this.timeToLive = timeToLive
+        this.timeToLive = refreshTokenExp
     }
 }

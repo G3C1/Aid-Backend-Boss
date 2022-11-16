@@ -2,6 +2,8 @@ package com.g3c1.aidboss.domain.seat.domain.entity
 
 import com.g3c1.aidboss.domain.store.domain.entity.Store
 import com.g3c1.temiuser.global.entity.BaseIdEntity
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.JoinColumn
@@ -16,6 +18,7 @@ data class Seat(
     @Column(nullable = false)
     var enabled: Boolean,
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "store_id")
     val store:Store
 ):BaseIdEntity()

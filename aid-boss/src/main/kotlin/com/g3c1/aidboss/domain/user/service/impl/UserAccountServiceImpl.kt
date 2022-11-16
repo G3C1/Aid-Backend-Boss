@@ -56,7 +56,6 @@ class UserAccountServiceImpl(
         refreshTokenRepository.save(redisRefreshToken)
         return TokenDto(accessToken,refreshToken,expiredAt)
     }
-
     override fun withdrawal() {
         val user = userUtils.getCurrentUser()
         userRepository.delete(user)

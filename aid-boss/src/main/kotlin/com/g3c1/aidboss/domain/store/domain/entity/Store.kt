@@ -1,10 +1,9 @@
 package com.g3c1.aidboss.domain.store.domain.entity
 
 import com.g3c1.aidboss.domain.user.domain.entity.User
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.ManyToOne
+import org.hibernate.annotations.OnDelete
+import org.hibernate.annotations.OnDeleteAction
+import javax.persistence.*
 
 @Entity
 data class Store(
@@ -14,6 +13,8 @@ data class Store(
     val name: String,
     val description: String,
     val img: String,
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(nullable = false)
     val user:User
 )
