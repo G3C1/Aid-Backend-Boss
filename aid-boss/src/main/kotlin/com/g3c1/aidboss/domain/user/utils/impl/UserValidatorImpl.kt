@@ -1,5 +1,6 @@
 package com.g3c1.aidboss.domain.user.utils.impl
 
+import com.g3c1.aidboss.domain.user.domain.entity.User
 import com.g3c1.aidboss.domain.user.domain.repository.UserRepository
 import com.g3c1.aidboss.domain.user.exception.PasswordDisMatchException
 import com.g3c1.aidboss.domain.user.exception.UserAlreadyExistException
@@ -19,8 +20,10 @@ class UserValidatorImpl(
         if(userRepository.existsById(userId)) throw UserAlreadyExistException()
     }
 
-    override fun validatePassword(loginDto: LoginDto) =
-        validatePasswordIsMatch(userUtils.findUserById(loginDto.id).password,loginDto.password)
+    override fun validatePassword(loginDto: LoginDto) {
+        val user: User = userUtils.findUserById(loginDto.id)
+        validatePasswordIsMatch(user.password, loginDto.password)
+    }
     private fun validatePasswordIsMatch(password: String, loginPassword: String) {
         if(!passwordEncoder.matches(password,loginPassword)){
             throw PasswordDisMatchException()
