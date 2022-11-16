@@ -2,7 +2,7 @@ package com.g3c1.aidboss.domain.food.presentaion
 
 import com.g3c1.aidboss.domain.food.presentaion.data.request.DeleteFoodRequest
 import com.g3c1.aidboss.domain.food.presentaion.data.request.UpdateFoodRequest
-import com.g3c1.aidboss.domain.food.presentaion.data.response.CategoryFoodListResponse
+import com.g3c1.aidboss.domain.food.presentaion.data.response.FoodListResponse
 import com.g3c1.aidboss.domain.food.service.FoodServiceV2
 import com.g3c1.aidboss.domain.food.utils.FoodConverter
 import org.jetbrains.annotations.NotNull
@@ -24,7 +24,7 @@ class FoodControllerV2(
     private val foodConverter: FoodConverter
 ) {
     @GetMapping("{serialNumber}")
-    fun findFood(@NotNull @PathVariable serialNumber: Long): ResponseEntity<List<CategoryFoodListResponse>> =
+    fun findFoodList(@NotNull @PathVariable serialNumber: Long): ResponseEntity<List<FoodListResponse>> =
         foodServiceV2.findFoodListBySerialNumber(serialNumber)
             .let { foodConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it) }

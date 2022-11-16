@@ -1,6 +1,6 @@
 package com.g3c1.aidboss.domain.food.presentaion.data.response
 
-data class CategoryFoodListResponse (
+data class FoodListResponse (
     val id: Long,
     val category: String,
     val foodList: List<FoodInfoResponse>

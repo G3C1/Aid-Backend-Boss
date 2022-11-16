@@ -1,7 +1,7 @@
 package com.g3c1.aidboss.domain.food.presentaion
 
 import com.g3c1.aidboss.domain.food.presentaion.data.request.CreateFoodRequest
-import com.g3c1.aidboss.domain.food.presentaion.data.response.CategoryFoodListResponse
+import com.g3c1.aidboss.domain.food.presentaion.data.response.FoodListResponse
 import com.g3c1.aidboss.domain.food.service.FoodService
 import com.g3c1.aidboss.domain.food.utils.FoodConverter
 import org.springframework.http.HttpStatus
@@ -20,7 +20,7 @@ class FoodController(
     private val foodConverter: FoodConverter
 ) {
     @GetMapping
-    fun findFoodList(): ResponseEntity<List<CategoryFoodListResponse>> =
+    fun findFoodList(): ResponseEntity<List<FoodListResponse>> =
         foodService.findFoodListByCategory()
             .let { foodConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it)}
