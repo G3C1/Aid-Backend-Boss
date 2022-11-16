@@ -27,7 +27,7 @@ class UserController(
             .let { userAccountService.login(it) }
             .let { userConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
-    @PutMapping
+    @PatchMapping
     fun refresh(@RequestHeader("Refresh-Token")refreshToken: String): ResponseEntity<TokenResponse> =
         userAccountService.refresh(refreshToken)
             .let { userConverter.toResponse(it) }
