@@ -7,13 +7,7 @@ import com.g3c1.aidboss.domain.user.service.UserAccountService
 import com.g3c1.aidboss.domain.user.utils.UserConverter
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestHeader
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
 @RestController
@@ -33,7 +27,7 @@ class UserController(
             .let { userAccountService.login(it) }
             .let { userConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
-    @PatchMapping
+    @PutMapping
     fun refresh(@RequestHeader("Refresh-Token")refreshToken: String): ResponseEntity<TokenResponse> =
         userAccountService.refresh(refreshToken)
             .let { userConverter.toResponse(it) }

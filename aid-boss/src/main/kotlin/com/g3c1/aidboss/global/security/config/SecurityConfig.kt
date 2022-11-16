@@ -7,6 +7,7 @@ import com.g3c1.aidboss.global.security.filter.JwtTokenFilter
 import com.g3c1.aidboss.global.security.jwt.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -32,7 +33,11 @@ class SecurityConfig(
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll() //board
+            .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+            .antMatchers(HttpMethod.POST,"api/v2/user/**").permitAll()
+            .antMatchers(HttpMethod.POST,"api/v2/user").permitAll()
+            .antMatchers(HttpMethod.PUT,"api/v2/user").permitAll()
+            .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
             .and()
