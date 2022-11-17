@@ -25,7 +25,7 @@ class UserValidatorImpl(
         validatePasswordIsMatch(user.password, loginDto.password)
     }
     private fun validatePasswordIsMatch(password: String, loginPassword: String) {
-        if(!passwordEncoder.matches(password,loginPassword)){
+        if(!passwordEncoder.matches(loginPassword,password)){
             throw PasswordDisMatchException()
         }else return
     }
