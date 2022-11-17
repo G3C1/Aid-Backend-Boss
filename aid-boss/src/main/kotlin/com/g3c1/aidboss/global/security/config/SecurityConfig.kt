@@ -37,6 +37,7 @@ class SecurityConfig(
             .authorizeRequests()
             .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
             .antMatchers(HttpMethod.POST,"/api/v2/user").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/v2/user/**").permitAll()
             .antMatchers(HttpMethod.PUT,"/api/v2/user").permitAll()
             .anyRequest().authenticated()
             .and()
