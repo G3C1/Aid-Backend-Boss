@@ -71,7 +71,7 @@ class JwtTokenProvider(
     }
 
     private fun getTokenSubject(token: String, secret: String): String {
-        return getTokenBody(token, secret).get("email", String::class.java)
+        return getTokenBody(token, secret).get("userId", String::class.java)
     }
     fun extractIdFromRefreshToken(token: String): String {
         val refresh = token.replace("Bearer ", "")

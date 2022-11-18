@@ -29,9 +29,10 @@ class UserController(
             .let { ResponseEntity.ok(it) }
     @PatchMapping
     fun refresh(@RequestHeader("Refresh-Token")refreshToken: String): ResponseEntity<TokenResponse> =
-        userAccountService.refresh(refreshToken)
+         userAccountService.refresh(refreshToken)
             .let { userConverter.toResponse(it) }
             .let { ResponseEntity.ok(it) }
+
     @DeleteMapping
     fun withdrawal(): ResponseEntity<Void>{
         userAccountService.withdrawal()

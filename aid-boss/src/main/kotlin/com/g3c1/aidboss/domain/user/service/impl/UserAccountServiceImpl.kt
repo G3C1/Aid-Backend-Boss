@@ -45,7 +45,7 @@ class UserAccountServiceImpl(
 
     override fun refresh(refreshToken: String): TokenDto {
         val userId: String = tokenProvider.extractIdFromRefreshToken(refreshToken)
-        if(userRepository.existsById(userId)){
+        if(!userRepository.existsById(userId)){
             throw UserNotFoundException()
         }
         val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow{UserNotFoundException()}
