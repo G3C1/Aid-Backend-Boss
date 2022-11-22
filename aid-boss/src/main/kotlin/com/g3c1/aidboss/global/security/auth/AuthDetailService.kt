@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class AuthDetailService(
+class  AuthDetailService(
     private val userRepository: UserRepository
 ): UserDetailsService {
     override fun loadUserByUsername(username: String?): UserDetails =

@@ -9,13 +9,13 @@ import com.g3c1.aidboss.domain.food.presentaion.data.dto.DeleteFoodDto
 import com.g3c1.aidboss.domain.food.presentaion.data.dto.UpdateFoodDto
 import com.g3c1.aidboss.domain.food.service.FoodServiceV2
 import com.g3c1.aidboss.domain.food.utils.FoodUtils
-import com.g3c1.aidboss.domain.store.utils.StoreUtlis
+import com.g3c1.aidboss.domain.store.utils.StoreUtils
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
 class FoodServiceV2Impl(
-    private val storeUtils: StoreUtlis,
+    private val storeUtils: StoreUtils,
     private val categoryUtils: CategoryUtils,
     private val foodUtils: FoodUtils,
     private val foodRepository: FoodRepository,

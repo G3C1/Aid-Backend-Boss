@@ -1,6 +1,7 @@
 package com.g3c1.aidboss.domain.seat.presentaion
 
 import com.g3c1.aidboss.domain.seat.presentaion.data.request.CreateSeatRequest
+import com.g3c1.aidboss.domain.seat.presentaion.data.response.SeatInfoResponse
 import com.g3c1.aidboss.domain.seat.service.SeatServiceV2
 import com.g3c1.aidboss.domain.seat.utils.SeatConverter
 import org.jetbrains.annotations.NotNull
@@ -15,6 +16,13 @@ class SeatControllerV2(
     private val seatConverter: SeatConverter,
     private val seatServiceV2: SeatServiceV2
 ) {
+    @GetMapping("{serialNumber}")
+    fun findSeatByStore(@PathVariable @NotNull serialNumber: Long): ResponseEntity<List<SeatInfoResponse>> =
+        seatServiceV2.findSeatByStoreId(serialNumber)
+            .let { seatConverter.toResponse(it) }
+            .let { ResponseEntity.ok().body(it) }
+
+
     @PostMapping("{serialNumber}")
     fun createSeat(@RequestBody @Valid createSeatRequest: CreateSeatRequest, @NotNull @PathVariable serialNumber: Long): ResponseEntity<Void> =
         seatConverter.toDto(createSeatRequest)

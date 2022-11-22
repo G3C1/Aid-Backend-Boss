@@ -4,7 +4,7 @@ import com.g3c1.aidboss.domain.category.domain.repository.CategoryRepository
 import com.g3c1.aidboss.domain.category.presentation.data.dto.CategoryDto
 import com.g3c1.aidboss.domain.category.service.CategoryServiceV2
 import com.g3c1.aidboss.domain.category.utils.CategoryConverter
-import com.g3c1.aidboss.domain.store.utils.StoreUtlis
+import com.g3c1.aidboss.domain.store.utils.StoreUtils
 import org.springframework.data.jpa.repository.Lock
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -14,7 +14,7 @@ import javax.persistence.LockModeType
 class CategoryServiceV2Impl(
     private val categoryConverter: CategoryConverter,
     private val categoryRepository: CategoryRepository,
-    private val storeUtils: StoreUtlis
+    private val storeUtils: StoreUtils
 ): CategoryServiceV2 {
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
