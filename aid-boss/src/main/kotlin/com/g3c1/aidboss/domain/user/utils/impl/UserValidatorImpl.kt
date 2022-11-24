@@ -2,7 +2,7 @@ package com.g3c1.aidboss.domain.user.utils.impl
 
 import com.g3c1.aidboss.domain.user.domain.entity.User
 import com.g3c1.aidboss.domain.user.domain.repository.UserRepository
-import com.g3c1.aidboss.domain.user.exception.PasswordDisMatchException
+import com.g3c1.aidboss.domain.user.exception.PasswordMisMatchException
 import com.g3c1.aidboss.domain.user.exception.UserAlreadyExistException
 import com.g3c1.aidboss.domain.user.presentation.data.dto.LoginDto
 import com.g3c1.aidboss.domain.user.utils.UserUtils
@@ -26,7 +26,7 @@ class UserValidatorImpl(
     }
     private fun validatePasswordIsMatch(password: String, loginPassword: String) {
         if(!passwordEncoder.matches(loginPassword,password)){
-            throw PasswordDisMatchException()
+            throw PasswordMisMatchException()
         }else return
     }
 }
