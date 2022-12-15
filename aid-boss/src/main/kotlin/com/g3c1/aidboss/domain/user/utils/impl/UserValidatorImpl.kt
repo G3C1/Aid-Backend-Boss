@@ -20,12 +20,12 @@ class UserValidatorImpl(
         if(userRepository.existsById(userId)) throw UserAlreadyExistException()
     }
 
-    override fun validatePassword(loginDto: LoginDto) {
-        val user: User = userUtils.findUserById(loginDto.id)
-        validatePasswordIsMatch(user.password, loginDto.password)
+    override fun validatePassword(dto: LoginDto) {
+        val user: User = userUtils.findUserById(dto.id)
+        validatePasswordIsMatch(user.password, dto.password)
     }
     private fun validatePasswordIsMatch(password: String, loginPassword: String) {
-        if(!passwordEncoder.matches(loginPassword,password)){
+        if(!passwordEncoder.matches(loginPassword, password)){
             throw PasswordMisMatchException()
         }else return
     }

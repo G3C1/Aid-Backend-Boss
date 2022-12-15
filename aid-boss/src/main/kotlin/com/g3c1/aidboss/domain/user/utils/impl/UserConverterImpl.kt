@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component
 
 @Component
 class UserConverterImpl: UserConverter {
-    override fun toDto(registerRequest: RegisterRequest): RegisterDto =
-        RegisterDto(registerRequest.id,registerRequest.password,registerRequest.name)
+    override fun toDto(request: RegisterRequest): RegisterDto =
+        RegisterDto(request.id, request.password, request.name)
 
-    override fun toDto(loginRequest: LoginRequest): LoginDto =
-       LoginDto(loginRequest.id,loginRequest.password)
-    override fun toResponse(tokenDto: TokenDto): TokenResponse =
-        TokenResponse(tokenDto.accessToken,tokenDto.refreshToken,tokenDto.expiredAt)
+    override fun toDto(request: LoginRequest): LoginDto =
+       LoginDto(request.id, request.password)
+    override fun toResponse(dto: TokenDto): TokenResponse =
+        TokenResponse(dto.accessToken, dto.refreshToken, dto.expiredAt)
 
-    override fun toEntity(registerDto: RegisterDto, encodedPassword: String): User =
-        User(registerDto.id,encodedPassword,registerDto.name)
+    override fun toEntity(dto: RegisterDto, encodedPassword: String): User =
+        User(dto.id, encodedPassword, dto.name)
 }
