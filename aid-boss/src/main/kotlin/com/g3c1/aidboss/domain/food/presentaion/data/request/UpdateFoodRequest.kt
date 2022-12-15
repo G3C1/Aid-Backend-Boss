@@ -8,13 +8,13 @@ data class UpdateFoodRequest (
     @field: NotNull
     val foodName :String,
     @field: NotNull
-    val foodImg:String,
+    val foodImg: String,
     @field: NotNull
     val foodDescription: String,
     @field: NotNull
-    val servings:Long,
+    val servings: Long,
     @field: NotNull
-    val price:Long,
+    val price: Long,
     @field: NotNull
     val categoryId: Long
 )

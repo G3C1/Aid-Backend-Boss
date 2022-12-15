@@ -19,7 +19,7 @@ class FoodServiceV2Impl(
     private val categoryUtils: CategoryUtils,
     private val foodUtils: FoodUtils,
     private val foodRepository: FoodRepository,
-):FoodServiceV2 {
+) : FoodServiceV2 {
     @Transactional(readOnly = true, rollbackFor = [Exception::class])
     override fun findFoodListBySerialNumber(serialNumber: Long): List<FoodListDto> =
         storeUtils.findStoreBySerialNumber(serialNumber)
@@ -27,15 +27,15 @@ class FoodServiceV2Impl(
             .map { category-> FoodListDto(category.id,category.name,foodUtils.findFoodByCategory(category)) }
 
     @Transactional(rollbackFor = [Exception::class])
-    override fun deleteFood(deleteFoodDto: DeleteFoodDto) {
-        val foodList:List<Food> = deleteFoodDto.foodIdList
+    override fun deleteFood(dto: DeleteFoodDto) {
+        val foodList: List<Food> = dto.foodIdList
             .map { foodRepository.findById(it).orElseThrow { FoodNotFoundException() } }
 
         foodRepository.deleteAll(foodList)
     }
     @Transactional(rollbackFor = [Exception::class])
     override fun updateFood(dto: UpdateFoodDto) {
-        val food:Food = foodRepository.findById(dto.foodId).orElseThrow { FoodNotFoundException() }
+        val food: Food = foodRepository.findById(dto.foodId).orElseThrow { FoodNotFoundException() }
         food.updateFood(dto,categoryUtils.findById(dto.categoryId))
     }
 }

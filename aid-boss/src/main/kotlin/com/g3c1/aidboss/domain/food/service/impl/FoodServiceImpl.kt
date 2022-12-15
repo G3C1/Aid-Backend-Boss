@@ -27,8 +27,8 @@ class FoodServiceImpl(
 
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    override fun createFood(createFoodDto: CreateFoodDto) {
-        foodConverter.toEntity(createFoodDto,categoryUtils.findById(createFoodDto.categoryId))
+    override fun createFood(dto: CreateFoodDto) {
+        foodConverter.toEntity(dto,categoryUtils.findById(dto.categoryId))
             .let { foodRepository.save(it) }
     }
 }

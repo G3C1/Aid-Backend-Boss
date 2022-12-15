@@ -6,6 +6,6 @@ import com.g3c1.aidboss.domain.food.presentaion.data.dto.UpdateFoodDto
 
 interface FoodServiceV2 {
     fun findFoodListBySerialNumber(serialNumber: Long): List<FoodListDto>
-    fun deleteFood(deleteFoodDto: DeleteFoodDto)
-    fun updateFood(updateFoodDto: UpdateFoodDto)
+    fun deleteFood(dto: DeleteFoodDto)
+    fun updateFood(dto: UpdateFoodDto)
 }

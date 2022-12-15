@@ -5,5 +5,5 @@ import com.g3c1.aidboss.domain.food.presentaion.data.dto.CreateFoodDto
 
 interface FoodService {
     fun findFoodListByCategory(): List<FoodListDto>
-    fun createFood(createFoodDto: CreateFoodDto)
+    fun createFood(dto: CreateFoodDto)
 }
