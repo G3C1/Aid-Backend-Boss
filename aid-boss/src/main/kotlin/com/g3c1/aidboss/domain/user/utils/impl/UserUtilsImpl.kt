@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component
 @Component
 class UserUtilsImpl(
     private val userRepository: UserRepository
-): UserUtils {
+) : UserUtils {
     override fun findUserById(id: String): User = userRepository.findUserById(id)?:throw UserNotFoundException()
     override fun getCurrentUser(): User {
         val userId: String = SecurityContextHolder.getContext().authentication.name
