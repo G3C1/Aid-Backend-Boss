@@ -6,6 +6,6 @@ import com.g3c1.aidboss.domain.category.presentation.data.request.CreateCategory
 import com.g3c1.aidboss.domain.store.domain.entity.Store
 
 interface CategoryConverter {
-    fun toDto(createCategoryRequest: CreateCategoryRequest): CategoryDto
-    fun toEntity(dto: CategoryDto,store:Store): Category
+    fun toDto(request: CreateCategoryRequest): CategoryDto
+    fun toEntity(dto: CategoryDto, entity: Store): Category
 }

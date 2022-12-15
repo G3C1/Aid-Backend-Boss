@@ -22,5 +22,4 @@ class CategoryController(
         categoryConverter.toDto(createCategoryListRequest)
             .let { categoryService.createCategory(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
-
 }

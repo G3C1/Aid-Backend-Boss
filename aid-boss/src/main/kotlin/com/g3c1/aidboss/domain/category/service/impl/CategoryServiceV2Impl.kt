@@ -15,11 +15,11 @@ class CategoryServiceV2Impl(
     private val categoryConverter: CategoryConverter,
     private val categoryRepository: CategoryRepository,
     private val storeUtils: StoreUtils
-): CategoryServiceV2 {
+) : CategoryServiceV2 {
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    override fun createCategory(categoryDto: CategoryDto, serialNumber: Long) {
-        categoryConverter.toEntity(categoryDto,storeUtils.findStoreBySerialNumber(serialNumber))
+    override fun createCategory(dto: CategoryDto, serialNumber: Long) {
+        categoryConverter.toEntity(dto,storeUtils.findStoreBySerialNumber(serialNumber))
             .let { categoryRepository.save(it) }
     }
 }

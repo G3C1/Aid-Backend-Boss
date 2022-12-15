@@ -18,9 +18,9 @@ class CategoryServiceImpl(
 ): CategoryService {
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    override fun createCategory(categoryDto: CategoryDto) {
+    override fun createCategory(dto: CategoryDto) {
         categoryConverter.toEntity(
-            categoryDto,
+            dto,
             Store(0, "", "", "", User("", "", ""))
         )
             .let { categoryRepository.save(it) }

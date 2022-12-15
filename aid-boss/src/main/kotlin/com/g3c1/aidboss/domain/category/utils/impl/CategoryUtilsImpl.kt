@@ -14,6 +14,4 @@ class CategoryUtilsImpl(
     override fun findAllCategory(): List<Category> = categoryRepository.findAll()
     override fun findById(categoryId: Long): Category = categoryRepository.findCategoryById(categoryId).orElseThrow { CategoryNotFoundException() }
     override fun findAllCategoryByStore(store: Store): List<Category> = categoryRepository.findAllByStore(store)
-
-
 }
