@@ -14,11 +14,9 @@ class SeatUtilsImpl(
 ): SeatUtils {
     override fun findSeatById(seatId: Long): Seat =
         seatRepository.findSeatById(seatId).orElseThrow { SeatNotFoundException() }
-
     override fun save(seat: Seat) {
         seatRepository.save(seat)
     }
-
     override fun findSeatByStoreId(serialNumber: Long): List<Seat> =
         storeUtils.findStoreBySerialNumber(serialNumber)
             .let { seatRepository.findAllByStore(it) }

@@ -20,8 +20,8 @@ class SeatServiceImpl(
 ): SeatService {
     @Transactional(rollbackFor = [Exception::class])
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    override fun createSeat(createSeatDto: CreateSeatDto) {
-        seatConverter.toEntity(createSeatDto,Store(0,"","","",User("","","")))
+    override fun createSeat(dto: CreateSeatDto) {
+        seatConverter.toEntity(dto,Store(0,"","","",User("","","")))
             .let { seatUtils.save(it)}
     }
 

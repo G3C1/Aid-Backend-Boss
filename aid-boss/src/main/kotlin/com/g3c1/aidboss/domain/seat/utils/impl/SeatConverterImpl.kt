@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component
 
 @Component
 class SeatConverterImpl:SeatConverter {
-    override fun toDto(createSeatRequest: CreateSeatRequest): CreateSeatDto =
-        CreateSeatDto(createSeatRequest.seatNumber,createSeatRequest.severalPeople)
+    override fun toDto(request: CreateSeatRequest): CreateSeatDto =
+        CreateSeatDto(request.seatNumber, request.severalPeople)
 
     override fun toDto(seat: Seat): SeatInfoDto =
         SeatInfoDto(seat.id, seat.seatNumber, seat.severalPeople, seat.enabled)
 
 
-    override fun toEntity(createSeatDto: CreateSeatDto,store:Store): Seat =
-        Seat(createSeatDto.seatNumber,createSeatDto.severalPeople,true,store)
+    override fun toEntity(dto: CreateSeatDto, entity: Store): Seat =
+        Seat(dto.seatNumber, dto.severalPeople,true, entity)
 
     override fun toResponse(dto: List<SeatInfoDto>): List<SeatInfoResponse> =
         dto.toList().map { SeatInfoResponse(it.idx, it.seatNumber, it.severalPeople, it.enabled) }
