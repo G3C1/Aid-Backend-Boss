@@ -1,6 +1,5 @@
 package com.g3c1.aidboss.domain.store.service.impl
 
-import com.g3c1.aidboss.domain.store.domain.entity.Store
 import com.g3c1.aidboss.domain.store.domain.repository.StoreRepository
 import com.g3c1.aidboss.domain.store.presentation.data.dto.CreateStoreDto
 import com.g3c1.aidboss.domain.store.presentation.data.dto.MyStoreDto
@@ -17,15 +16,15 @@ class StoreServiceImpl(
     private val userUtils: UserUtils
 ): StoreService {
     @Transactional(rollbackFor = [Exception::class])
-    override fun createStore(createStoreDto: CreateStoreDto) {
+    override fun createStore(dto: CreateStoreDto) {
         val user = userUtils.getCurrentUser()
-        storeConverter.toEntity(createStoreDto,user)
+        storeConverter.toEntity(dto,user)
             .let { storeRepository.save(it) }
     }
 
     override fun findAllById(): MyStoreDto {
         val user = userUtils.getCurrentUser()
-        val storeList:List<Store> = storeRepository.findAllByUser(user)
+        val storeList = storeRepository.findAllByUser(user)
         return storeConverter.toDto(user.name,storeList)
     }
 }

@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component
 
 @Component
 class StoreConverterImpl: StoreConverter {
-    override fun toDto(createStoreRequest: CreateStoreRequest): CreateStoreDto =
-        CreateStoreDto(createStoreRequest.serialNumber,createStoreRequest.name,createStoreRequest.description,createStoreRequest.img)
+    override fun toDto(request: CreateStoreRequest): CreateStoreDto =
+        CreateStoreDto(request.serialNumber, request.name, request.description, request.img)
     override fun toDto(userName: String, storeList: List<Store>): MyStoreDto =
         MyStoreDto(userName,storeList.map { MyStoreDto.StoreInfoDto(it.name,it.img,it.description) })
     override fun toResponse(dto: MyStoreDto): MyStoreResponse =

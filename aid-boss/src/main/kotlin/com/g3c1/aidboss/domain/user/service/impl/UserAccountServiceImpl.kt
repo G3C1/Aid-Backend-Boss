@@ -12,10 +12,9 @@ import com.g3c1.aidboss.domain.user.utils.UserConverter
 import com.g3c1.aidboss.domain.user.utils.UserUtils
 import com.g3c1.aidboss.domain.user.utils.UserValidator
 import com.g3c1.aidboss.global.security.jwt.JwtTokenProvider
-import org.springframework.security.core.context.SecurityContextHolder
+import com.g3c1.aidboss.global.utils.TokenUtils
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-import java.time.ZonedDateTime
 
 @Service
 class UserAccountServiceImpl(
@@ -24,23 +23,22 @@ class UserAccountServiceImpl(
     private val userValidator: UserValidator,
     private val passwordEncoder: PasswordEncoder,
     private val tokenProvider: JwtTokenProvider,
+    private val tokenUtils: TokenUtils,
     private val userUtils: UserUtils,
     private val refreshTokenRepository: RefreshTokenRepository
 ): UserAccountService {
-    override fun register(registerDto: RegisterDto) {
-        userValidator.validateUserId(registerDto.id)
-            .let { userConverter.toEntity(registerDto,passwordEncoder.encode(registerDto.password))}
+    override fun register(dto: RegisterDto) {
+        userValidator.validateUserId(dto.id)
+            .let { userConverter.toEntity(dto, passwordEncoder.encode(dto.password))}
             .let { userRepository.save(it) }
     }
 
-    override fun login(loginDto: LoginDto): TokenDto {
-        userValidator.validatePassword(loginDto)
-        val accessToken: String = tokenProvider.generateAccessToken(loginDto.id)
-        val refreshToken: String = tokenProvider.generateRefreshToken(loginDto.id)
-        val expiredAt: ZonedDateTime = tokenProvider.getExpiredTime()
-        val refreshTokenInfo = RefreshToken(loginDto.id,refreshToken,tokenProvider.getRefreshTokenExp())
+    override fun login(dto: LoginDto): TokenDto {
+        userValidator.validatePassword(dto)
+        val tokenDto = tokenUtils.getTokenDto(dto.id)
+        val refreshTokenInfo = RefreshToken(dto.id, tokenDto.refreshToken, tokenProvider.getRefreshTokenExp())
         refreshTokenRepository.save(refreshTokenInfo)
-        return TokenDto(accessToken,refreshToken,expiredAt)
+        return tokenDto
     }
 
     override fun refresh(refreshToken: String): TokenDto {
@@ -49,12 +47,9 @@ class UserAccountServiceImpl(
             throw UserNotFoundException()
         }
         val redisRefreshToken = refreshTokenRepository.findById(userId).orElseThrow{UserNotFoundException()}
-        val accessToken: String = tokenProvider.generateAccessToken(userId)
-        val refreshToken: String = tokenProvider.generateRefreshToken(userId)
-        val expiredAt: ZonedDateTime = tokenProvider.getExpiredTime()
         redisRefreshToken.update(refreshToken,tokenProvider.getRefreshTokenExp())
         refreshTokenRepository.save(redisRefreshToken)
-        return TokenDto(accessToken,refreshToken,expiredAt)
+        return tokenUtils.getTokenDto(userId)
     }
     override fun withdrawal() {
         val user = userUtils.getCurrentUser()
