@@ -26,7 +26,7 @@ class StoreController(
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
     @GetMapping
     fun findAllById():ResponseEntity<MyStoreResponse> =
-        storeService.findAllById()
+        storeService.findAllStoreById()
             .let { storeConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it) }
 }

@@ -22,7 +22,7 @@ class StoreServiceImpl(
             .let { storeRepository.save(it) }
     }
 
-    override fun findAllById(): MyStoreDto {
+    override fun findAllStoreById(): MyStoreDto {
         val user = userUtils.getCurrentUser()
         val storeList = storeRepository.findAllByUser(user)
         return storeConverter.toDto(user.name,storeList)
