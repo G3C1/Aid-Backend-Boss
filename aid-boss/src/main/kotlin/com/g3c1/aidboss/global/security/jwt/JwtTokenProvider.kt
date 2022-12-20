@@ -5,9 +5,12 @@ import com.g3c1.aidboss.global.security.exception.ExpiredTokenException
 import com.g3c1.aidboss.global.security.exception.InvalidTokenException
 import com.g3c1.aidboss.global.security.properties.JwtProperties
 import io.jsonwebtoken.*
+import io.jsonwebtoken.security.Keys
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
+import java.nio.charset.StandardCharsets
+import java.security.Key
 import java.security.SignatureException
 import java.time.ZonedDateTime
 import java.util.*
@@ -52,8 +55,9 @@ class JwtTokenProvider(
 
     private fun getTokenBody(token: String, secret: String): Claims {
         return try {
-            Jwts.parser()
-                .setSigningKey(Base64.getEncoder().encodeToString(secret.toByteArray()))
+            Jwts.parserBuilder()
+                .setSigningKey(getSigningKey(secret))
+                .build()
                 .parseClaimsJws(token)
                 .body
         } catch (e: ExpiredJwtException) {
@@ -63,6 +67,10 @@ class JwtTokenProvider(
         } catch (e: SignatureException) {
             throw InvalidTokenException()
         }
+    }
+    private fun getSigningKey(secret: String): Key{
+        val byteArray = secret.toByteArray()
+        return Keys.hmacShaKeyFor(byteArray)
     }
 
     fun resolveToken(request: HttpServletRequest): String? {
