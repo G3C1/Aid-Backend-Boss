@@ -5,6 +5,7 @@ import com.g3c1.aidboss.domain.store.presentation.data.dto.CreateStoreDto
 import com.g3c1.aidboss.domain.store.presentation.data.dto.MyStoreDto
 import com.g3c1.aidboss.domain.store.service.StoreService
 import com.g3c1.aidboss.domain.store.utils.StoreConverter
+import com.g3c1.aidboss.domain.store.utils.StoreValidator
 import com.g3c1.aidboss.domain.user.utils.UserUtils
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -13,12 +14,13 @@ import org.springframework.transaction.annotation.Transactional
 class StoreServiceImpl(
     private val storeRepository: StoreRepository,
     private val storeConverter: StoreConverter,
+    private val storeValidator: StoreValidator,
     private val userUtils: UserUtils
 ): StoreService {
     @Transactional(rollbackFor = [Exception::class])
     override fun createStore(dto: CreateStoreDto) {
         val user = userUtils.getCurrentUser()
-
+        storeValidator.validateStore(dto.serialNumber)
         storeConverter.toEntity(dto,user)
             .let { storeRepository.save(it) }
     }

@@ -22,7 +22,7 @@ class UserController(
             .let { userAccountService.register(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
     @PostMapping("/login")
-    fun login(@RequestBody @Valid loginRequest: LoginRequest): ResponseEntity<TokenResponse> =
+    fun login(@Valid @RequestBody loginRequest: LoginRequest): ResponseEntity<TokenResponse> =
         userConverter.toDto(loginRequest)
             .let { userAccountService.login(it) }
             .let { userConverter.toResponse(it) }
