@@ -12,5 +12,6 @@ enum class ErrorCode(val message:String, val status: Int) {
     USER_NOT_FOUND("UserIsNotFound",404),
     CATEGORY_NOT_FOUND("CategoryIsNotFound",404),
     USER_ALREADY_EXIST("User Already Exist",409),
+    STORE_ALREADY_EXIST("Store Already Exist",409),
     INTERNET_SERVER_ERROR("InternetServerError",500)
 }
