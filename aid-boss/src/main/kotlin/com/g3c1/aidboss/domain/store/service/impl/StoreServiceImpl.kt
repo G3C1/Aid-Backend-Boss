@@ -18,6 +18,7 @@ class StoreServiceImpl(
     @Transactional(rollbackFor = [Exception::class])
     override fun createStore(dto: CreateStoreDto) {
         val user = userUtils.getCurrentUser()
+
         storeConverter.toEntity(dto,user)
             .let { storeRepository.save(it) }
     }
