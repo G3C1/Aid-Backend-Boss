@@ -9,7 +9,6 @@ import io.jsonwebtoken.security.Keys
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
 import org.springframework.stereotype.Component
-import java.nio.charset.StandardCharsets
 import java.security.Key
 import java.security.SignatureException
 import java.time.ZonedDateTime
@@ -31,7 +30,7 @@ class JwtTokenProvider(
 
     private fun generateToken(userId: String, type: String, secret: String, exp: Long): String {
         return Jwts.builder()
-            .signWith(SignatureAlgorithm.HS256, Base64.getEncoder().encodeToString(secret.toByteArray()))
+            .signWith(getSigningKey(secret),SignatureAlgorithm.HS256)
             .claim("userId", userId)
             .claim("type", type)
             .setIssuedAt(Date())
