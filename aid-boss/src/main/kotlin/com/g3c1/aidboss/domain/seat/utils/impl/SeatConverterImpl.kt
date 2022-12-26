@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
 @Component
 class SeatConverterImpl:SeatConverter {
     override fun toDto(request: CreateSeatRequest): CreateSeatDto =
-        CreateSeatDto(request.seatNumber, request.severalPeople)
+        CreateSeatDto(request.seatNumber, request.severalPeople, request.x, request.y)
 
     override fun toDto(seat: Seat): SeatInfoDto =
         SeatInfoDto(seat.id, seat.seatNumber, seat.severalPeople, seat.enabled)
