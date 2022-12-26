@@ -15,11 +15,11 @@ class SeatConverterImpl:SeatConverter {
         CreateSeatDto(request.seatNumber, request.severalPeople, request.x, request.y)
 
     override fun toDto(seat: Seat): SeatInfoDto =
-        SeatInfoDto(seat.id, seat.seatNumber, seat.severalPeople, seat.enabled)
+        SeatInfoDto(seat.id, seat.seatNumber, seat.severalPeople, seat.locationX, seat.locationY, seat.enabled)
 
 
     override fun toEntity(dto: CreateSeatDto, entity: Store): Seat =
-        Seat(dto.seatNumber, dto.severalPeople,true, entity)
+        Seat(dto.seatNumber, dto.severalPeople,true, dto.x, dto.y, entity)
 
     override fun toResponse(dto: List<SeatInfoDto>): List<SeatInfoResponse> =
         dto.toList().map { SeatInfoResponse(it.idx, it.seatNumber, it.severalPeople, it.enabled) }
