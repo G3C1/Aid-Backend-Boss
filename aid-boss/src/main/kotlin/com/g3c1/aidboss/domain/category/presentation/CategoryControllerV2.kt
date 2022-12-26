@@ -3,6 +3,7 @@ package com.g3c1.aidboss.domain.category.presentation
 import com.g3c1.aidboss.domain.category.presentation.data.request.CreateCategoryRequest
 import com.g3c1.aidboss.domain.category.service.CategoryServiceV2
 import com.g3c1.aidboss.domain.category.utils.CategoryConverter
+import org.jetbrains.annotations.NotNull
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -16,7 +17,7 @@ class CategoryControllerV2(
 ) {
     @PostMapping("{serial_number}")
     fun createCategory(@RequestBody @Valid createCategoryListRequest: CreateCategoryRequest,
-                       @PathVariable serialNumber: Long): ResponseEntity<Void> =
+                       @NotNull @PathVariable("serial_number") serialNumber: Long): ResponseEntity<Void> =
         categoryConverter.toDto(createCategoryListRequest)
             .let { categoryServiceV2.createCategory(it,serialNumber) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
