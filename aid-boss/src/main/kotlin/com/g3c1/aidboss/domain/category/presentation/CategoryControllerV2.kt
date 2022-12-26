@@ -16,7 +16,7 @@ class CategoryControllerV2(
     private val categoryServiceV2: CategoryServiceV2
 ) {
     @PostMapping("{serial_number}")
-    fun createCategory(@RequestBody @Valid createCategoryListRequest: CreateCategoryRequest,
+    fun createCategory(@Valid @RequestBody createCategoryListRequest: CreateCategoryRequest,
                        @NotNull @PathVariable("serial_number") serialNumber: Long): ResponseEntity<Void> =
         categoryConverter.toDto(createCategoryListRequest)
             .let { categoryServiceV2.createCategory(it,serialNumber) }

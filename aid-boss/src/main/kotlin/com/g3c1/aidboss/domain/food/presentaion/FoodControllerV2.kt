@@ -30,13 +30,13 @@ class FoodControllerV2(
             .let { ResponseEntity.ok().body(it) }
 
     @DeleteMapping
-    fun deleteFood(@RequestBody @Valid deleteFoodRequest: DeleteFoodRequest): ResponseEntity<Void> =
+    fun deleteFood(@Valid @RequestBody deleteFoodRequest: DeleteFoodRequest): ResponseEntity<Void> =
         foodConverter.toDto(deleteFoodRequest)
             .let { foodServiceV2.deleteFood(it) }
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }
 
     @PutMapping
-    fun updateFood(@RequestBody @Valid updateFoodRequest: UpdateFoodRequest): ResponseEntity<Void> =
+    fun updateFood(@Valid @RequestBody updateFoodRequest: UpdateFoodRequest): ResponseEntity<Void> =
         foodConverter.toDto(updateFoodRequest)
             .let { foodServiceV2.updateFood(it) }
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build() }

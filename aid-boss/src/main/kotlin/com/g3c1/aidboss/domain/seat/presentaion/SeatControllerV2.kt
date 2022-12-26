@@ -24,7 +24,7 @@ class SeatControllerV2(
 
 
     @PostMapping("{serial_number}")
-    fun createSeat(@RequestBody @Valid createSeatRequest: CreateSeatRequest, @NotNull @PathVariable("serial_number") serialNumber: Long): ResponseEntity<Void> =
+    fun createSeat(@Valid @RequestBody createSeatRequest: CreateSeatRequest, @NotNull @PathVariable("serial_number") serialNumber: Long): ResponseEntity<Void> =
         seatConverter.toDto(createSeatRequest)
             .let { seatServiceV2.createSeat(it,serialNumber) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
