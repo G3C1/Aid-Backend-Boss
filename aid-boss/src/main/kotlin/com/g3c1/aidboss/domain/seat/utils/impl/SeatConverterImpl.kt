@@ -22,6 +22,6 @@ class SeatConverterImpl:SeatConverter {
         Seat(dto.seatNumber, dto.severalPeople,true, dto.x, dto.y, entity)
 
     override fun toResponse(dto: List<SeatInfoDto>): List<SeatInfoResponse> =
-        dto.toList().map { SeatInfoResponse(it.idx, it.seatNumber, it.severalPeople, it.enabled) }
+        dto.toList().map { SeatInfoResponse(it.idx, it.seatNumber, it.severalPeople, it.x, it.y, it.enabled) }
 
 }
