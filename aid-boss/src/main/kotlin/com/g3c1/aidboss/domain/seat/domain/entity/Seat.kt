@@ -17,6 +17,10 @@ data class Seat(
     val severalPeople: Long,
     @Column(nullable = false)
     var enabled: Boolean,
+    @Column(nullable = false, name = "location_x")
+    val locationX: Float,
+    @Column(nullable = false, name = "location_y")
+    val locationY: Float,
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "store_id")
