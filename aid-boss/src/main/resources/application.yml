@@ -12,4 +12,3 @@ server:
 jwt:
   accessSecret: zdeRaZg/EiMrAVuOX6pZeU5cdas5VqExPhTGje3dzIw=
   refreshSecret: 3Koh9ZqwkJOkjTSe1Y9k+r1gnTo8C5gPlAckjufNQYQ=
-

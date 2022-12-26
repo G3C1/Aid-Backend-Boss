@@ -6,5 +6,9 @@ data class CreateSeatRequest (
     @field:NotNull
     val seatNumber: Long,
     @field:NotNull
-    val severalPeople: Long
+    val severalPeople: Long,
+    @field: NotNull
+    val x: Float,
+    @field: NotNull
+    val y: Float
 )

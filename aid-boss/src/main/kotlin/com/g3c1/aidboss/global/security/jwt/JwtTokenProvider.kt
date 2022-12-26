@@ -24,7 +24,7 @@ class JwtTokenProvider(
     companion object{
         private const val ACCESS_TYPE = "access"
         private const val REFRESH_TYPE = "refresh"
-        private const val ACCESS_EXP: Long = 60*15
+        private const val ACCESS_EXP: Long = 30
         private const val REFRESH_EXP: Long = 60*60*24*7
     }
 
