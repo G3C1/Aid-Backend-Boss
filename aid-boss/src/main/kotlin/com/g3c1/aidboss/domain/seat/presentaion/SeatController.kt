@@ -26,7 +26,7 @@ class SeatController(
             .let { seatService.createSeat(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }
 
-    @PatchMapping("/cancel/{seatId}")
+    @PatchMapping("/cancel/{seat_id}")
     fun patchDisableUsingSeat(@NotNull @PathVariable seatId: Long): ResponseEntity<Void> =
         seatService.patchDisableUsingSeat(seatId)
             .let { ResponseEntity.status(HttpStatus.NO_CONTENT).build()}

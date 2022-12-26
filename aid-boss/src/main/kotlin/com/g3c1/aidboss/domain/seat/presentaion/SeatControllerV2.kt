@@ -16,14 +16,14 @@ class SeatControllerV2(
     private val seatConverter: SeatConverter,
     private val seatServiceV2: SeatServiceV2
 ) {
-    @GetMapping("{serialNumber}")
+    @GetMapping("{serial_number}")
     fun findSeatByStore(@PathVariable @NotNull serialNumber: Long): ResponseEntity<List<SeatInfoResponse>> =
         seatServiceV2.findSeatByStoreId(serialNumber)
             .let { seatConverter.toResponse(it) }
             .let { ResponseEntity.ok().body(it) }
 
 
-    @PostMapping("{serialNumber}")
+    @PostMapping("{serial_number}")
     fun createSeat(@RequestBody @Valid createSeatRequest: CreateSeatRequest, @NotNull @PathVariable serialNumber: Long): ResponseEntity<Void> =
         seatConverter.toDto(createSeatRequest)
             .let { seatServiceV2.createSeat(it,serialNumber) }
