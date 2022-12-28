@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile
 import javax.validation.Valid
 
 @RestController
-@RequestMapping("/image")
+@RequestMapping("api/v2/image")
 class ImageController(
     private val imageService: ImageService,
     private val imageConverter: ImageConverter
