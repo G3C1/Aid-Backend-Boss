@@ -8,6 +8,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class AidBossApplication
 
+
 fun main(args: Array<String>) {
     runApplication<AidBossApplication>(*args)
 }

@@ -14,11 +14,20 @@ jwt:
   refreshSecret: 3Koh9ZqwkJOkjTSe1Y9k+r1gnTo8C5gPlAckjufNQYQ=
 cloud:
   aws:
+    stack:
+      auto: false
     s3:
-      bucket: temi-boss
-      url: https://temi-boss.s3.ap-northeast-2.amazonaws.com/
+      bucket: aid-boss
+      url: https://aid-boss.s3.ap-northeast-2.amazonaws.com/
     region:
       static: ap-northeast-2
+      auto: false
     credentials:
-      access-Key: AKIAYP3F5VRCBDR7D35H
-      secret-Key: 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
+      access-Key: AKIAYP3F5VRCNBIDIZOW
+      secret-Key: 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
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
