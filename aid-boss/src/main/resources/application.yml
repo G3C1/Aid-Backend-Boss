@@ -12,3 +12,13 @@ server:
 jwt:
   accessSecret: zdeRaZg/EiMrAVuOX6pZeU5cdas5VqExPhTGje3dzIw=
   refreshSecret: 3Koh9ZqwkJOkjTSe1Y9k+r1gnTo8C5gPlAckjufNQYQ=
+cloud:
+  aws:
+    s3:
+      bucket: temi-boss
+      url: https://temi-boss.s3.ap-northeast-2.amazonaws.com/
+    region:
+      static: ap-northeast-2
+    credentials:
+      access-Key: AKIAYP3F5VRCBDR7D35H
+      secret-Key: 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
