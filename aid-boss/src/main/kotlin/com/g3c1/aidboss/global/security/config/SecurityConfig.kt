@@ -39,7 +39,7 @@ class SecurityConfig(
             .antMatchers(HttpMethod.POST,"/api/v2/user").permitAll()
             .antMatchers(HttpMethod.POST,"/api/v2/user/**").permitAll()
             .antMatchers(HttpMethod.PATCH,"/api/v2/user").permitAll()
-            .antMatchers(HttpMethod.POST,"/image").permitAll()
+            .antMatchers(HttpMethod.POST,"api/v2/image").permitAll()
             .anyRequest().authenticated()
             .and()
             .exceptionHandling().authenticationEntryPoint(CustomAuthenticationEntryPoint(objectMapper))
