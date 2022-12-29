@@ -8,6 +8,7 @@ import javax.persistence.*
 @Entity
 data class Store(
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name= "serial_number")
     val serialNumber:Long,
     val name: String,
