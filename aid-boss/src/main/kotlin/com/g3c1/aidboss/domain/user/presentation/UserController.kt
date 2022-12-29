@@ -17,7 +17,7 @@ class UserController(
     private val userConverter: UserConverter
 ) {
     @PostMapping
-    fun register(@Valid @RequestBody registerRequest: RegisterRequest):ResponseEntity<Void> =
+    fun register(@Valid     @RequestBody registerRequest: RegisterRequest):ResponseEntity<Void> =
         userConverter.toDto(registerRequest)
             .let { userAccountService.register(it) }
             .let { ResponseEntity.status(HttpStatus.CREATED).build() }

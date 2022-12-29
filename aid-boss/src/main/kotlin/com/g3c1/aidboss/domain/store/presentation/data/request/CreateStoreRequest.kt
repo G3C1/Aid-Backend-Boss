@@ -4,8 +4,6 @@ import org.jetbrains.annotations.NotNull
 
 data class CreateStoreRequest (
     @field:NotNull
-    val serialNumber: Long,
-    @field:NotNull
     val name: String,
     @field:NotNull
     val description: String,

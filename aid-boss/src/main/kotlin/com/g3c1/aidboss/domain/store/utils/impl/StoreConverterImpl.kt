@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component
 @Component
 class StoreConverterImpl: StoreConverter {
     override fun toDto(request: CreateStoreRequest): CreateStoreDto =
-        CreateStoreDto(request.serialNumber, request.name, request.description, request.img)
+        CreateStoreDto( request.name, request.description, request.img)
     override fun toDto(userName: String, storeList: List<Store>): MyStoreDto =
         MyStoreDto(userName,storeList.map { MyStoreDto.StoreInfoDto(it.name,it.img,it.description) })
     override fun toResponse(dto: MyStoreDto): MyStoreResponse =
         MyStoreResponse(dto.userName,dto.StoreList.map { MyStoreResponse.StoreInfoResponse(it.name,it.img,it.description)})
     override fun toEntity(dto: CreateStoreDto, user: User): Store =
-        Store(dto.serialNumber,dto.name,dto.description,dto.img,user)
+        Store(0,dto.name,dto.description,dto.img,user)
 }
