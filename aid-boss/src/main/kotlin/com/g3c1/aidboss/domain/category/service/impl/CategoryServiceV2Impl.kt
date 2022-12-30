@@ -2,6 +2,7 @@ package com.g3c1.aidboss.domain.category.service.impl
 
 import com.g3c1.aidboss.domain.category.domain.repository.CategoryRepository
 import com.g3c1.aidboss.domain.category.presentation.data.dto.CategoryDto
+import com.g3c1.aidboss.domain.category.presentation.data.dto.CategoryQueryDto
 import com.g3c1.aidboss.domain.category.service.CategoryServiceV2
 import com.g3c1.aidboss.domain.category.utils.CategoryConverter
 import com.g3c1.aidboss.domain.store.utils.StoreUtils
@@ -22,4 +23,8 @@ class CategoryServiceV2Impl(
         categoryConverter.toEntity(dto,storeUtils.findStoreBySerialNumber(serialNumber))
             .let { categoryRepository.save(it) }
     }
+
+    override fun findCategory(serialNumber: Long): List<CategoryQueryDto> =
+        categoryRepository.findAllByStore(storeUtils.findStoreBySerialNumber(serialNumber))
+            .map{ categoryConverter.toDto(it) }
 }
